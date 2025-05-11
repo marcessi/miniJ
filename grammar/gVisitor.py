@@ -49,6 +49,11 @@ class gVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by gParser#seqExpr.
+    def visitSeqExpr(self, ctx:gParser.SeqExprContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by gParser#relationalExpr.
     def visitRelationalExpr(self, ctx:gParser.RelationalExprContext):
         return self.visitChildren(ctx)
@@ -84,11 +89,6 @@ class gVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by gParser#iotiExpr.
-    def visitIotiExpr(self, ctx:gParser.IotiExprContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by gParser#foldlExpr.
     def visitFoldlExpr(self, ctx:gParser.FoldlExprContext):
         return self.visitChildren(ctx)
@@ -114,8 +114,8 @@ class gVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by gParser#iotiFuncExpr.
-    def visitIotiFuncExpr(self, ctx:gParser.IotiFuncExprContext):
+    # Visit a parse tree produced by gParser#seqFuncExpr.
+    def visitSeqFuncExpr(self, ctx:gParser.SeqFuncExprContext):
         return self.visitChildren(ctx)
 
 

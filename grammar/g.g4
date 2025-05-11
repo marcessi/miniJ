@@ -18,14 +18,14 @@ expression
     // Unary operations
     | ']' expression                                              # identityExpr
     | '#' expression                                              # sizeExpr
-    | 'i.' expression                                             # iotiExpr
-    | op=('+' | '-' | '*' | '%' | '|' | '^') ':' expression       # modifiedExpr
-    | op=('+' | '-' | '*' | '%' | '|' | '^') '/' expression       # foldlExpr
-    
+    | 'i.' expression                                             # seqExpr
+    | op=('+' | '-' | '*' | '%' | '|' | '^' | '>' | '<' | '>=' | '<=' | '=' | '<>') ':' expression  # modifiedExpr
+    | op=('+' | '-' | '*' | '%' | '|' | '^' | '>' | '<' | '>=' | '<=' | '=' | '<>') '/' expression  # foldlExpr
+
     // Binary operations
-    | <assoc=right> expression op=('+' | '-' | '*' | '%' | '|' | '^') expression  # binaryExpr
-    | expression op=('+' | '-' | '*' | '%' | '|' | '^') '~' expression  # flippedBinaryExpr
-    | <assoc=right> expression op=(',' | '{' | '#') expression # specialBinaryExpr
+    | <assoc=right> expression op=('+' | '-' | '*' | '%' | '|' | '^') expression     # binaryExpr
+    | expression op=('+' | '-' | '*' | '%' | '|' | '^') '~' expression               # flippedBinaryExpr
+    | <assoc=right> expression op=(',' | '{' | '#') expression                       # specialBinaryExpr
     | <assoc=right> expression op=('>' | '<' | '>=' | '<=' | '=' | '<>') expression  # relationalExpr
     
     // Function application
@@ -36,13 +36,13 @@ expression
     ;
 
 atom
-    : (INT | NEG_INT)+  # listAtom
-    | WORD    # variableAtom
+    : (INT | NEG_INT)+                                            # listAtom
+    | WORD                                                        # variableAtom
     | ']'                                                         # identityFuncExpr
     | '#'                                                         # sizeFuncExpr
-    | 'i.'                                                        # iotiFuncExpr
-    | op=('+' | '-' | '*' | '%' | '|' | '^') ':'                  # modifiedFuncExpr
-    | op=('+' | '-' | '*' | '%' | '|' | '^') '/'                  # foldlFuncExpr
+    | 'i.'                                                        # seqFuncExpr
+    | op=('+' | '-' | '*' | '%' | '|' | '^' | '>' | '<' | '>=' | '<=' | '=' | '<>') ':'        # modifiedFuncExpr
+    | op=('+' | '-' | '*' | '%' | '|' | '^' | '>' | '<' | '>=' | '<=' | '=' | '<>') '/'        # foldlFuncExpr
     ;
 
 // Lexer rules

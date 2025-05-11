@@ -17,34 +17,34 @@ def serializedATN():
         1,3,1,3,1,3,1,3,3,3,62,8,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,
         3,1,3,1,3,1,3,1,3,1,3,1,3,5,3,80,8,3,10,3,12,3,83,9,3,1,4,4,4,86,
         8,4,11,4,12,4,87,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,3,4,98,8,4,1,4,
-        0,1,6,5,0,2,4,6,8,0,4,1,0,8,13,2,0,6,6,17,18,1,0,19,24,1,0,26,27,
-        120,0,13,1,0,0,0,2,33,1,0,0,0,4,35,1,0,0,0,6,61,1,0,0,0,8,97,1,0,
-        0,0,10,12,3,2,1,0,11,10,1,0,0,0,12,15,1,0,0,0,13,11,1,0,0,0,13,14,
-        1,0,0,0,14,16,1,0,0,0,15,13,1,0,0,0,16,17,5,0,0,1,17,1,1,0,0,0,18,
-        20,3,4,2,0,19,21,5,31,0,0,20,19,1,0,0,0,20,21,1,0,0,0,21,22,1,0,
-        0,0,22,23,5,30,0,0,23,34,1,0,0,0,24,26,3,6,3,0,25,27,5,31,0,0,26,
-        25,1,0,0,0,26,27,1,0,0,0,27,28,1,0,0,0,28,29,5,30,0,0,29,34,1,0,
-        0,0,30,31,5,31,0,0,31,34,5,30,0,0,32,34,5,30,0,0,33,18,1,0,0,0,33,
-        24,1,0,0,0,33,30,1,0,0,0,33,32,1,0,0,0,34,3,1,0,0,0,35,36,5,28,0,
-        0,36,37,5,1,0,0,37,38,3,6,3,0,38,5,1,0,0,0,39,40,6,3,-1,0,40,62,
-        3,8,4,0,41,42,5,2,0,0,42,62,3,8,4,0,43,44,5,3,0,0,44,45,3,6,3,0,
-        45,46,5,4,0,0,46,62,1,0,0,0,47,48,5,5,0,0,48,62,3,6,3,11,49,50,5,
-        6,0,0,50,62,3,6,3,10,51,52,5,7,0,0,52,62,3,6,3,9,53,54,7,0,0,0,54,
-        55,5,14,0,0,55,62,3,6,3,8,56,57,7,0,0,0,57,58,5,15,0,0,58,62,3,6,
-        3,7,59,60,5,28,0,0,60,62,3,6,3,2,61,39,1,0,0,0,61,41,1,0,0,0,61,
-        43,1,0,0,0,61,47,1,0,0,0,61,49,1,0,0,0,61,51,1,0,0,0,61,53,1,0,0,
-        0,61,56,1,0,0,0,61,59,1,0,0,0,62,81,1,0,0,0,63,64,10,6,0,0,64,65,
-        7,0,0,0,65,80,3,6,3,6,66,67,10,5,0,0,67,68,7,0,0,0,68,69,5,16,0,
-        0,69,80,3,6,3,6,70,71,10,4,0,0,71,72,7,1,0,0,72,80,3,6,3,4,73,74,
-        10,3,0,0,74,75,7,2,0,0,75,80,3,6,3,3,76,77,10,1,0,0,77,78,5,25,0,
-        0,78,80,3,6,3,1,79,63,1,0,0,0,79,66,1,0,0,0,79,70,1,0,0,0,79,73,
-        1,0,0,0,79,76,1,0,0,0,80,83,1,0,0,0,81,79,1,0,0,0,81,82,1,0,0,0,
-        82,7,1,0,0,0,83,81,1,0,0,0,84,86,7,3,0,0,85,84,1,0,0,0,86,87,1,0,
-        0,0,87,85,1,0,0,0,87,88,1,0,0,0,88,98,1,0,0,0,89,98,5,28,0,0,90,
-        98,5,5,0,0,91,98,5,6,0,0,92,98,5,7,0,0,93,94,7,0,0,0,94,98,5,14,
-        0,0,95,96,7,0,0,0,96,98,5,15,0,0,97,85,1,0,0,0,97,89,1,0,0,0,97,
-        90,1,0,0,0,97,91,1,0,0,0,97,92,1,0,0,0,97,93,1,0,0,0,97,95,1,0,0,
-        0,98,9,1,0,0,0,9,13,20,26,33,61,79,81,87,97
+        0,1,6,5,0,2,4,6,8,0,5,1,0,8,19,1,0,8,13,2,0,6,6,23,24,1,0,14,19,
+        1,0,26,27,120,0,13,1,0,0,0,2,33,1,0,0,0,4,35,1,0,0,0,6,61,1,0,0,
+        0,8,97,1,0,0,0,10,12,3,2,1,0,11,10,1,0,0,0,12,15,1,0,0,0,13,11,1,
+        0,0,0,13,14,1,0,0,0,14,16,1,0,0,0,15,13,1,0,0,0,16,17,5,0,0,1,17,
+        1,1,0,0,0,18,20,3,4,2,0,19,21,5,31,0,0,20,19,1,0,0,0,20,21,1,0,0,
+        0,21,22,1,0,0,0,22,23,5,30,0,0,23,34,1,0,0,0,24,26,3,6,3,0,25,27,
+        5,31,0,0,26,25,1,0,0,0,26,27,1,0,0,0,27,28,1,0,0,0,28,29,5,30,0,
+        0,29,34,1,0,0,0,30,31,5,31,0,0,31,34,5,30,0,0,32,34,5,30,0,0,33,
+        18,1,0,0,0,33,24,1,0,0,0,33,30,1,0,0,0,33,32,1,0,0,0,34,3,1,0,0,
+        0,35,36,5,28,0,0,36,37,5,1,0,0,37,38,3,6,3,0,38,5,1,0,0,0,39,40,
+        6,3,-1,0,40,62,3,8,4,0,41,42,5,2,0,0,42,62,3,8,4,0,43,44,5,3,0,0,
+        44,45,3,6,3,0,45,46,5,4,0,0,46,62,1,0,0,0,47,48,5,5,0,0,48,62,3,
+        6,3,11,49,50,5,6,0,0,50,62,3,6,3,10,51,52,5,7,0,0,52,62,3,6,3,9,
+        53,54,7,0,0,0,54,55,5,20,0,0,55,62,3,6,3,8,56,57,7,0,0,0,57,58,5,
+        21,0,0,58,62,3,6,3,7,59,60,5,28,0,0,60,62,3,6,3,2,61,39,1,0,0,0,
+        61,41,1,0,0,0,61,43,1,0,0,0,61,47,1,0,0,0,61,49,1,0,0,0,61,51,1,
+        0,0,0,61,53,1,0,0,0,61,56,1,0,0,0,61,59,1,0,0,0,62,81,1,0,0,0,63,
+        64,10,6,0,0,64,65,7,1,0,0,65,80,3,6,3,6,66,67,10,5,0,0,67,68,7,1,
+        0,0,68,69,5,22,0,0,69,80,3,6,3,6,70,71,10,4,0,0,71,72,7,2,0,0,72,
+        80,3,6,3,4,73,74,10,3,0,0,74,75,7,3,0,0,75,80,3,6,3,3,76,77,10,1,
+        0,0,77,78,5,25,0,0,78,80,3,6,3,1,79,63,1,0,0,0,79,66,1,0,0,0,79,
+        70,1,0,0,0,79,73,1,0,0,0,79,76,1,0,0,0,80,83,1,0,0,0,81,79,1,0,0,
+        0,81,82,1,0,0,0,82,7,1,0,0,0,83,81,1,0,0,0,84,86,7,4,0,0,85,84,1,
+        0,0,0,86,87,1,0,0,0,87,85,1,0,0,0,87,88,1,0,0,0,88,98,1,0,0,0,89,
+        98,5,28,0,0,90,98,5,5,0,0,91,98,5,6,0,0,92,98,5,7,0,0,93,94,7,0,
+        0,0,94,98,5,20,0,0,95,96,7,0,0,0,96,98,5,21,0,0,97,85,1,0,0,0,97,
+        89,1,0,0,0,97,90,1,0,0,0,97,91,1,0,0,0,97,92,1,0,0,0,97,93,1,0,0,
+        0,97,95,1,0,0,0,98,9,1,0,0,0,9,13,20,26,33,61,79,81,87,97
     ]
 
 class gParser ( Parser ):
@@ -58,9 +58,9 @@ class gParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'=:'", "'_'", "'('", "')'", "']'", "'#'", 
-                     "'i.'", "'+'", "'-'", "'*'", "'%'", "'|'", "'^'", "':'", 
-                     "'/'", "'~'", "','", "'{'", "'>'", "'<'", "'>='", "'<='", 
-                     "'='", "'<>'", "'@:'" ]
+                     "'i.'", "'+'", "'-'", "'*'", "'%'", "'|'", "'^'", "'>'", 
+                     "'<'", "'>='", "'<='", "'='", "'<>'", "':'", "'/'", 
+                     "'~'", "','", "'{'", "'@:'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
@@ -160,7 +160,7 @@ class gParser ( Parser ):
             self.state = 13
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 3691003884) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 3692036076) != 0):
                 self.state = 10
                 self.line()
                 self.state = 15
@@ -444,6 +444,23 @@ class gParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
+    class SeqExprContext(ExpressionContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a gParser.ExpressionContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def expression(self):
+            return self.getTypedRuleContext(gParser.ExpressionContext,0)
+
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSeqExpr" ):
+                return visitor.visitSeqExpr(self)
+            else:
+                return visitor.visitChildren(self)
+
+
     class RelationalExprContext(ExpressionContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a gParser.ExpressionContext
@@ -577,23 +594,6 @@ class gParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
-    class IotiExprContext(ExpressionContext):
-
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a gParser.ExpressionContext
-            super().__init__(parser)
-            self.copyFrom(ctx)
-
-        def expression(self):
-            return self.getTypedRuleContext(gParser.ExpressionContext,0)
-
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIotiExpr" ):
-                return visitor.visitIotiExpr(self)
-            else:
-                return visitor.visitChildren(self)
-
-
     class FoldlExprContext(ExpressionContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a gParser.ExpressionContext
@@ -678,7 +678,7 @@ class gParser ( Parser ):
                 pass
 
             elif la_ == 6:
-                localctx = gParser.IotiExprContext(self, localctx)
+                localctx = gParser.SeqExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 51
@@ -694,13 +694,13 @@ class gParser ( Parser ):
                 self.state = 53
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 16128) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1048320) != 0)):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 54
-                self.match(gParser.T__13)
+                self.match(gParser.T__19)
                 self.state = 55
                 self.expression(8)
                 pass
@@ -712,13 +712,13 @@ class gParser ( Parser ):
                 self.state = 56
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 16128) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1048320) != 0)):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 57
-                self.match(gParser.T__14)
+                self.match(gParser.T__20)
                 self.state = 58
                 self.expression(7)
                 pass
@@ -781,7 +781,7 @@ class gParser ( Parser ):
                             self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 68
-                        self.match(gParser.T__15)
+                        self.match(gParser.T__21)
                         self.state = 69
                         self.expression(6)
                         pass
@@ -796,7 +796,7 @@ class gParser ( Parser ):
                         self.state = 71
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
-                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 393280) != 0)):
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 25165888) != 0)):
                             localctx.op = self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
@@ -815,7 +815,7 @@ class gParser ( Parser ):
                         self.state = 74
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
-                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 33030144) != 0)):
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1032192) != 0)):
                             localctx.op = self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
@@ -936,7 +936,7 @@ class gParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
-    class IotiFuncExprContext(AtomContext):
+    class SeqFuncExprContext(AtomContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a gParser.AtomContext
             super().__init__(parser)
@@ -944,8 +944,8 @@ class gParser ( Parser ):
 
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIotiFuncExpr" ):
-                return visitor.visitIotiFuncExpr(self)
+            if hasattr( visitor, "visitSeqFuncExpr" ):
+                return visitor.visitSeqFuncExpr(self)
             else:
                 return visitor.visitChildren(self)
 
@@ -1036,7 +1036,7 @@ class gParser ( Parser ):
                 pass
 
             elif la_ == 5:
-                localctx = gParser.IotiFuncExprContext(self, localctx)
+                localctx = gParser.SeqFuncExprContext(self, localctx)
                 self.enterOuterAlt(localctx, 5)
                 self.state = 92
                 self.match(gParser.T__6)
@@ -1048,13 +1048,13 @@ class gParser ( Parser ):
                 self.state = 93
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 16128) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1048320) != 0)):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 94
-                self.match(gParser.T__13)
+                self.match(gParser.T__19)
                 pass
 
             elif la_ == 7:
@@ -1063,13 +1063,13 @@ class gParser ( Parser ):
                 self.state = 95
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 16128) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1048320) != 0)):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 96
-                self.match(gParser.T__14)
+                self.match(gParser.T__20)
                 pass
 
 
