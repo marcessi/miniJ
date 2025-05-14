@@ -9,6 +9,7 @@ class TreeVisitor(gVisitor):
         
     def visitProgram(self, ctx):
         print(f"Procesando {len(list(ctx.line()))} líneas")
+        # Procesar líneas normales (con salto de línea)
         for line_ctx in ctx.line():
             if line_ctx.assignment():
                 assign_stmt_node = line_ctx.assignment()
@@ -19,6 +20,23 @@ class TreeVisitor(gVisitor):
                 print(f"Procesando expresión: {expr_text}")
                 
                 result = self.visit(line_ctx.expression())
+                if result is not None:
+                    self.results.append(result)
+                    print("Resultado: ", end="")
+                    self.print_result(result)
+        
+        # Procesar la última línea (sin salto de línea)
+        if ctx.lastLine():
+            last_line = ctx.lastLine()
+            if last_line.assignment():
+                assign_stmt_node = last_line.assignment()
+                self.visit(assign_stmt_node)
+            elif last_line.expression():
+                expr_text = self.preformat_expr_text(last_line.expression().getText())
+                
+                print(f"Procesando expresión: {expr_text}")
+                
+                result = self.visit(last_line.expression())
                 if result is not None:
                     self.results.append(result)
                     print("Resultado: ", end="")

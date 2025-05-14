@@ -91,4 +91,5 @@ sum =: +/ vec
 inv =: 9 8 7 6 5 4 3 2 1 0
 cond =: 25 < sum
 res =: cond * inv + (1 - cond) * vec
-res
+sum                     NB. resultado: 45
+res                     NB. resultado: 9 8 7 6 5 4 3 2 1 0
