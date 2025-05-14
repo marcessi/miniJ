@@ -1,9 +1,11 @@
 grammar g;
 
 // Parser rules
-program: (line)* EOF;
+program: (line)* lastLine? EOF;
 
-line: assignment (COMMENT)? NL | expression (COMMENT)? NL | COMMENT NL | NL;
+line: (assignment | expression) (COMMENT)? NL | COMMENT NL | NL;
+
+lastLine: (assignment | expression) (COMMENT)?;
 
 assignment
     : WORD '=:' expression        # assignmentLabel
@@ -31,7 +33,7 @@ expression
     // Function application
     | WORD expression                                             # functionCallExpr
     
-    // Composition (lowest precedence, but right-associative)
+    // Composition
     | <assoc=right> expression '@:' expression                    # composeExpr
     ;
 

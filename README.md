@@ -1,0 +1,191 @@
+# miniJ: Intérprete para un subconjunto de J
+
+## Descripción
+
+miniJ es un intérprete para un subconjunto del lenguaje de programación J, implementado como parte de un proyecto académico. El intérprete procesa código en la sintaxis de J utilizando una gramática ANTLR y lo ejecuta utilizando numpy para las operaciones de arrays.
+
+## Características
+
+El intérprete soporta las siguientes características del lenguaje J:
+
+- **Arrays y operaciones básicas**: Manipulación de arrays numéricos con operaciones como suma, resta, multiplicación, división entera, módulo y potencia.
+- **Variables y asignación**: Almacenamiento de valores en variables con el operador `=:`.
+- **Operadores aritméticos**: `+`, `-`, `*`, `%` (división), `|` (módulo), `^` (potencia).
+- **Operadores relacionales**: `>`, `<`, `>=`, `<=`, `=`, `<>`.
+- **Operadores especiales**: 
+  - `]` (identidad)
+  - `,` (concatenación)
+  - `#` (tamaño y filtrado)
+  - `{` (indexación)
+  - `i.` (generación de secuencias)
+- **Modificadores**:
+  - `:` (aplicación de operador a un valor consigo mismo)
+  - `/` (fold/reducción)
+  - `~` (flip/inversión de argumentos)
+- **Definición de funciones**: Mediante asignación y composición.
+- **Composición de funciones**: Con el operador `@:`.
+
+## Sintaxis y Operadores
+
+### Sintaxis Básica
+
+- **Arrays**: Se escriben como números separados por espacios: `1 2 3`
+- **Comentarios**: Comienzan con `NB.` y continúan hasta el final de la línea
+- **Asignación**: Se realiza con el operador `=:`: `x =: 1 2 3`
+- **Valores negativos**: Se representan con un guion bajo antes del número: `_1 _2 _3`
+
+### Operadores Aritméticos
+
+- **Suma (`+`)**: `1 + 2` = `3`, `1 2 3 + 4 5 6` = `5 7 9`
+- **Resta (`-`)**: `5 - 2` = `3`, `5 5 5 - 1 2 3` = `4 3 2`
+- **Multiplicación (`*`)**: `2 * 3` = `6`, `2 * 1 2 3` = `2 4 6`
+- **División (`%`)**: `6 % 2` = `3` (división entera), `10 % 3` = `3`
+- **Módulo (`|`)**: `2 | 7` = `1`, `3 | 10` = `1` (nota: los operandos están al revés que en otros lenguajes)
+- **Potencia (`^`)**: `2 ^ 3` = `8`, `2 ^ 1 2 3` = `2 4 8`
+
+### Operadores Relacionales
+
+- **Mayor (`>`)**: `2 > 1` = `1`, `2 > 2` = `0`
+- **Menor (`<`)**: `1 < 2` = `1`, `2 < 2` = `0`
+- **Mayor o igual (`>=`)**: `2 >= 2` = `1`, `1 >= 2` = `0`
+- **Menor o igual (`<=`)**: `2 <= 2` = `1`, `3 <= 2` = `0`
+- **Igual (`=`)**: `2 = 2` = `1`, `2 = 3` = `0`
+- **Distinto (`<>`)**: `2 <> 3` = `1`, `2 <> 2` = `0`
+
+### Operadores Especiales
+
+- **Identidad (`]`)**: `] 1 2 3` = `1 2 3`
+- **Tamaño (`#`)**: `# 1 2 3` = `3`
+- **Filtrado (`#`)**: `1 0 1 # 1 2 3` = `1 3` (filtra usando una máscara de unos y ceros)
+- **Concatenación (`,`)**: `1 , 2 3` = `1 2 3`
+- **Indexación (`{`)**: `1 { 10 20 30` = `20` (indexación basada en cero)
+- **Secuencia (`i.`)**: `i. 5` = `0 1 2 3 4` (genera los primeros n números naturales)
+
+### Modificadores
+
+- **Duplicación (`:`)**: Convierte un operador binario en unario que aplica la operación al valor consigo mismo:
+  - `+: 3` = `6` (equivale a `3 + 3`)
+  - `*: 4` = `16` (equivale a `4 * 4`)
+  - `-: 5` = `0` (equivale a `5 - 5`)
+  - `=: 3` = `1` (equivale a `3 = 3`)
+
+- **Reducción (`/`)**: Aplica la operación de forma acumulativa a todos los elementos:
+  - `+/ 1 2 3 4` = `10` (suma: 1+2+3+4)
+  - `*/ 1 2 3 4` = `24` (producto: 1*2*3*4)
+  - `=/ 3 3 3 3` = `1` (comprueba si todos son iguales)
+  - `</ 1 2 3 4` = `1` (comprueba si está ordenado estrictamente)
+  - `<=/ 1 2 2 3` = `1` (comprueba si está ordenado)
+
+- **Inversión de argumentos (`~`)**: Invierte el orden de los argumentos en operadores binarios:
+  - `2 +~ 3` = `5` (equivale a `3 + 2`)
+  - `2 |~ 7` = `1` (equivale a `7 | 2`)
+
+### Definición y Composición de Funciones
+
+- **Definición simple**: `double =: 2 * ]`
+- **Aplicación**: `double 3` = `6`
+- **Composición (`@:`)**: `square =: *:`, `double_square =: +: @: *:`, `double_square 3` = `18`
+
+## Ejemplos Detallados
+
+### Variables y Asignación
+
+```j
+x =: 1 2 3
+y =: 10 20 30
+sum =: x + y       NB. resultado: 11 22 33
+prod =: x * y      NB. resultado: 10 40 90
+sum + prod         NB. resultado: 21 62 123
+```
+
+### Funciones y Composición
+
+```j
+NB. Definición de funciones básicas
+square =: *:           NB. Define función cuadrado
+double =: 2 * ]        NB. Define función doble
+add1 =: 1 + ]          NB. Define función incremento
+
+NB. Composición de funciones
+complex_fn =: square @: double @: add1
+complex_fn 1 2 3        NB. resultado: 16 36 64  NB. ((1+1)*2)², ((2+1)*2)², ((3+1)*2)²
+```
+
+### Fold y Operadores Relacionales
+
+```j
+NB. Comprueba si todos los elementos son positivos
+all_positive =: */ @: 0 < ]
+all_positive 1 2 3 4     NB. resultado: 1  NB. Todos son > 0
+all_positive _1 2 3 4    NB. resultado: 0  NB. No todos son > 0
+
+NB. Comprueba si algún elemento es mayor que 5
+any_gt5 =: +/ @: 5 < ]
+any_gt5 1 2 3 4         NB. resultado: 0  NB. Ningún elemento > 5
+any_gt5 1 6 3 7         NB. resultado: 2  NB. Dos elementos > 5
+
+NB. Comprueba si todos los elementos son iguales
+all_equal =: =/
+all_equal 3 3 3 3       NB. resultado: 1  NB. Todos iguales
+all_equal 3 3 2 3       NB. resultado: 0  NB. No todos iguales
+```
+
+### Filtrado y Procesamiento
+
+```j
+NB. Filtrar números pares de una secuencia
+nums =: i. 10
+evens_mask_func =: 0 = ] @: mod2
+evens_mask =: evens_mask_func nums
+evens =: evens_mask # nums
+evens                    NB. resultado: 0 2 4 6 8
+
+NB. Calcular el producto de los números impares
+odds_mask_func =: 1 = ] @: mod2
+odds_mask =: odds_mask_func nums
+odds =: odds_mask # nums
+odds                    NB. resultado: 1 3 5 7 9
+prod_odds =: */
+prod_odds odds          NB. resultado: 945  NB. 1*3*5*7*9 = 945
+```
+
+## Detalles de Implementación
+
+- **Gramática ANTLR**: Define la sintaxis del lenguaje con reglas para expresiones, operadores, y precedencia.
+- **Visitor Pattern**: Implementado en Python para interpretar y ejecutar el código.
+- **Numpy**: Utilizado para operaciones vectoriales eficientes.
+- **Asociatividad a la derecha**: Las operaciones se evalúan de derecha a izquierda, como en J:
+  - `5 + 2 * 3` = `5 + (2 * 3)` = `11`
+  - `5 * 2 + 3` = `5 * (2 + 3)` = `25`
+
+## Cómo Ejecutar
+
+1. Asegúrate de tener Python instalado con los paquetes requeridos:
+   ```
+   pip install antlr4-python3-runtime numpy
+   ```
+
+2. Genera el parser a partir de la gramática ANTLR:
+   ```
+   antlr4 -Dlanguage=Python3 grammar/g.g4
+   ```
+
+3. Ejecuta el intérprete en un archivo de prueba:
+   ```
+   python main.py tests/example2.j
+   ```
+
+## Limitaciones
+
+- Solo trabaja con números enteros
+- No implementa todas las características avanzadas de J
+- No soporta arrays multidimensionales
+- Las funciones solo pueden operar sobre un parámetro
+- Algunos operadores tienen comportamiento simplificado
+
+## Referencias
+
+- [Lenguaje J](https://www.jsoftware.com/)
+- [Learning J](https://www.jsoftware.com/help/learning/contents.htm)
+- [ANTLR4](https://www.antlr.org/)
+- [Documentación de Numpy](https://numpy.org/doc/)

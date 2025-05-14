@@ -19,6 +19,11 @@ class gVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by gParser#lastLine.
+    def visitLastLine(self, ctx:gParser.LastLineContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by gParser#assignmentLabel.
     def visitAssignmentLabel(self, ctx:gParser.AssignmentLabelContext):
         return self.visitChildren(ctx)

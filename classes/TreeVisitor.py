@@ -329,38 +329,119 @@ class TreeVisitor(gVisitor):
         left = self.visit(ctx.expression(0))
         
         op = ctx.op.text
+
+        # both parameters are functions
+        if callable(left) and callable(right):
+            def function_with_both_functions(x):
+                left_result = left(x)
+                right_result = right(x)
+                
+                if not isinstance(left_result, np.ndarray):
+                    left_result = np.array([left_result])
+                if not isinstance(right_result, np.ndarray):
+                    right_result = np.array([right_result])
+                
+                if len(left_result) == 1 and len(right_result) > 1:
+                    left_result = np.full_like(right_result, left_result[0])
+                elif len(right_result) == 1 and len(left_result) > 1:
+                    right_result = np.full_like(left_result, right_result[0])
+                
+                if len(left_result) != len(right_result):
+                    raise Exception("Length error: arrays must have the same length")
+                    
+                scalar_input = not isinstance(x, np.ndarray)
+                    
+                if op == '+':
+                    result = left_result + right_result
+                elif op == '-':
+                    result = left_result - right_result
+                elif op == '*':
+                    result = left_result * right_result
+                elif op == '%':
+                    result = left_result // right_result
+                elif op == '|':
+                    result = right_result % left_result
+                elif op == '^':
+                    result = left_result ** right_result
+                    
+                if scalar_input and len(result) == 1:
+                    return result[0]
+                return result
+                
+            return function_with_both_functions
         
-        # second parameter is a function
-        if callable(right):
-            def function_with_operator(x):
+        # first parameter is a function
+        if callable(left):
+            def function_with_left_function(x):
                 if not isinstance(x, np.ndarray):
                     x = np.array([x])
                     scalar_input = True
                 else:
                     scalar_input = False
                     
+                left_result = left(x)
+                
+                if not isinstance(left_result, np.ndarray):
+                    left_result = np.array([left_result])
+                    
+                if len(left_result) == 1 and len(x) > 1:
+                    left_result = np.full_like(x, left_result[0])
+                    
                 if op == '+':
-                    result = left + x
+                    result = left_result + right
                 elif op == '-':
-                    result = left - x
+                    result = left_result - right
                 elif op == '*':
-                    result = left * x
+                    result = left_result * right
                 elif op == '%':
-                    result = left // x
+                    result = left_result // right
                 elif op == '|':
-                    result = x % left
+                    result = right % left_result
                 elif op == '^':
-                    result = left ** x
+                    result = left_result ** right
                     
                 if scalar_input and len(result) == 1:
                     return result[0]
                 return result
+                    
+            return function_with_left_function
+    
+        # second parameter is a function
+        if callable(right):
+            def function_with_right_function(x):
+                if not isinstance(x, np.ndarray):
+                    x = np.array([x])
+                    scalar_input = True
+                else:
+                    scalar_input = False
+                    
+                right_result = right(x)
                 
-            return function_with_operator
-        
-        # first parameter is a function
-        if callable(left):
-            raise TypeError(f"Error: Operación binaria no soportada con función como operando izquierdo")
+                if not isinstance(right_result, np.ndarray):
+                    right_result = np.array([right_result])
+                    
+                if len(right_result) == 1 and len(x) > 1:
+                    right_result = np.full_like(x, right_result[0])
+                    
+                if op == '+':
+                    result = left + right_result
+                elif op == '-':
+                    result = left - right_result
+                elif op == '*':
+                    result = left * right_result
+                elif op == '%':
+                    result = left // right_result
+                elif op == '|':
+                    result = right_result % left
+                elif op == '^':
+                    result = left ** right_result
+                    
+                if scalar_input and len(result) == 1:
+                    return result[0]
+                return result
+                    
+            return function_with_right_function
+
         
         # normal case
         if not isinstance(left, np.ndarray):
@@ -397,37 +478,118 @@ class TreeVisitor(gVisitor):
 
         op = ctx.op.text
         
-        # second parameter is a function
-        if callable(right):
-            def function_with_operator(x):
+        # both parameters are functions
+        if callable(left) and callable(right):
+            def function_with_both_functions(x):
+                left_result = left(x)
+                right_result = right(x)
+                
+                if not isinstance(left_result, np.ndarray):
+                    left_result = np.array([left_result])
+                if not isinstance(right_result, np.ndarray):
+                    right_result = np.array([right_result])
+                
+                if len(left_result) == 1 and len(right_result) > 1:
+                    left_result = np.full_like(right_result, left_result[0])
+                elif len(right_result) == 1 and len(left_result) > 1:
+                    right_result = np.full_like(left_result, right_result[0])
+                
+                if len(left_result) != len(right_result):
+                    raise Exception("Length error: arrays must have the same length")
+                    
+                scalar_input = not isinstance(x, np.ndarray)
+                    
+                if op == '+':
+                    result = right_result + left_result
+                elif op == '-':
+                    result = right_result - left_result
+                elif op == '*':
+                    result = right_result * left_result
+                elif op == '%':
+                    result = right_result // left_result
+                elif op == '|':
+                    result = left_result % right_result
+                elif op == '^':
+                    result = right_result ** left_result
+                    
+                if scalar_input and len(result) == 1:
+                    return result[0]
+                return result
+                
+            return function_with_both_functions
+
+        # first parameter is a function
+        if callable(left):
+            def function_with_left_function(x):
                 if not isinstance(x, np.ndarray):
                     x = np.array([x])
                     scalar_input = True
                 else:
                     scalar_input = False
                     
+                left_result = left(x)
+                
+                if not isinstance(left_result, np.ndarray):
+                    left_result = np.array([left_result])
+                    
+                if len(left_result) == 1 and len(x) > 1:
+                    left_result = np.full_like(x, left_result[0])
+                    
                 if op == '+':
-                    result = x + left
+                    result = right + left_result
                 elif op == '-':
-                    result = x - left
+                    result = right - left_result
                 elif op == '*':
-                    result = x * left
+                    result = right * left_result
                 elif op == '%':
-                    result = x // left
+                    result = right // left_result
                 elif op == '|':
-                    result = left % x
+                    result = left_result % right
                 elif op == '^':
-                    result = x ** left
+                    result = right ** left_result
                     
                 if scalar_input and len(result) == 1:
                     return result[0]
                 return result
+                    
+            return function_with_left_function
+
+        # second parameter is a function
+        if callable(right):
+            def function_with_right_function(x):
+                if not isinstance(x, np.ndarray):
+                    x = np.array([x])
+                    scalar_input = True
+                else:
+                    scalar_input = False
+                    
+                right_result = right(x)
                 
-            return function_with_operator
+                if not isinstance(right_result, np.ndarray):
+                    right_result = np.array([right_result])
+                    
+                if len(right_result) == 1 and len(x) > 1:
+                    right_result = np.full_like(x, right_result[0])
+                    
+                if op == '+':
+                    result = right_result + left
+                elif op == '-':
+                    result = right_result - left
+                elif op == '*':
+                    result = right_result * left
+                elif op == '%':
+                    result = right_result // left
+                elif op == '|':
+                    result = left % right_result
+                elif op == '^':
+                    result = right_result ** left
+                    
+                if scalar_input and len(result) == 1:
+                    return result[0]
+                return result
+                    
+            return function_with_right_function
         
-        # first parameter is a function
-        if callable(left):
-            raise TypeError(f"Error: Operación binaria no soportada con función como operando izquierdo")
         
         # normal case
         if not isinstance(left, np.ndarray):
@@ -461,37 +623,85 @@ class TreeVisitor(gVisitor):
     def visitSpecialBinaryExpr(self, ctx):
         left = self.visit(ctx.expression(0))
         right = self.visit(ctx.expression(1))
+
         op = ctx.op.text
         
-        # second parameter is a function
-        if callable(right):
-            def special_binary_function(x):
+        # both parameters are functions
+        if callable(left) and callable(right):
+            def function_with_both_functions(x):
+                left_result = left(x)
+                right_result = right(x)
+                
+                if not isinstance(left_result, np.ndarray) and op in [',', '#']:
+                    left_result = np.array([left_result])
+                if not isinstance(right_result, np.ndarray) and op in [',', '#']:
+                    right_result = np.array([right_result])
+                    
+                scalar_input = not isinstance(x, np.ndarray)
+                    
+                if op == ',':
+                    result = np.concatenate((left_result, right_result))
+                elif op == '#':
+                    if not all(val in [0, 1] for val in left_result):
+                        raise Exception("El primer operando del filtro debe ser una máscara de 0s y 1s")
+                    result = right_result[np.array(left_result, dtype=bool)]
+                elif op == '{':
+                    try:
+                        if isinstance(left_result, np.ndarray):
+                            if np.any(np.array(left_result, dtype=int) < 0):
+                                raise Exception("Índices negativos no permitidos")
+                            result = right_result[np.array(left_result, dtype=int)]
+                        else:
+                            if left_result < 0:
+                                raise Exception("Índice negativo no permitido")
+                            result = right_result[left_result]
+                    except IndexError:
+                        raise Exception("Índice fuera de rango")
+                    
+                if scalar_input and op != '{' and len(result) == 1:
+                    return result[0]
+                return result
+                
+            return function_with_both_functions
+
+        # first parameter is a function
+        if callable(left):
+            def special_binary_left_function(x):
                 if not isinstance(x, np.ndarray) and op in [',', '#']:
                     x = np.array([x])
                     scalar_input = True
                 else:
                     scalar_input = False
                     
+                left_result = left(x)
+                
+                if not isinstance(left_result, np.ndarray) and op in [',', '#']:
+                    left_result = np.array([left_result])
+                    
                 if op == ',':
-                    if not isinstance(left, np.ndarray):
-                        left_array = np.array([left])
+                    if not isinstance(right, np.ndarray):
+                        right_array = np.array([right])
                     else:
-                        left_array = left
-                    result = np.concatenate((left_array, x))
+                        right_array = right
+                    result = np.concatenate((left_result, right_array))
                 elif op == '#':
-                    if not all(val in [0, 1] for val in left):
-                        raise Exception("El primer operando del filtro debe ser una máscara de 0s y 1s")
-                    result = x[np.array(left, dtype=bool)]
+                    if not all(val in [0, 1] for val in left_result):
+                        # Convertir directamente a booleanos para más flexibilidad
+                        mask = np.array(left_result).astype(bool)
+                        result = right[mask]
+                    else:
+                        # Si son 0s y 1s explícitos, usarlos como están
+                        result = right[np.array(left_result, dtype=bool)]
                 elif op == '{':
                     try:
-                        if isinstance(left, np.ndarray):
-                            if np.any(np.array(left, dtype=int) < 0):
+                        if isinstance(left_result, np.ndarray):
+                            if np.any(np.array(left_result, dtype=int) < 0):
                                 raise Exception("Índices negativos no permitidos")
-                            result = x[np.array(left, dtype=int)]
+                            result = right[np.array(left_result, dtype=int)]
                         else:
-                            if left < 0:
+                            if left_result < 0:
                                 raise Exception("Índice negativo no permitido")
-                            result = x[left]
+                            result = right[left_result]
                     except IndexError:
                         raise Exception("Índice fuera de rango")
                 
@@ -499,7 +709,54 @@ class TreeVisitor(gVisitor):
                     return result[0]
                 return result
             
-            return special_binary_function
+            return special_binary_left_function
+
+        # second parameter is a function
+        if callable(right):
+            def special_binary_right_function(x):
+                if not isinstance(x, np.ndarray) and op in [',', '#']:
+                    x = np.array([x])
+                    scalar_input = True
+                else:
+                    scalar_input = False
+                    
+                right_result = right(x)
+                
+                if not isinstance(right_result, np.ndarray) and op in [',', '#']:
+                    right_result = np.array([right_result])
+                    
+                if op == ',':
+                    if not isinstance(left, np.ndarray):
+                        left_array = np.array([left])
+                    else:
+                        left_array = left
+                    result = np.concatenate((left_array, right_result))
+                elif op == '#':
+                    if not all(val in [0, 1] for val in left):
+                        # Convertir directamente a booleanos para más flexibilidad
+                        mask = np.array(left).astype(bool)
+                        result = right_result[mask]
+                    else:
+                        # Si son 0s y 1s explícitos, usarlos como están
+                        result = right_result[np.array(left, dtype=bool)]
+                elif op == '{':
+                    try:
+                        if isinstance(left, np.ndarray):
+                            if np.any(np.array(left, dtype=int) < 0):
+                                raise Exception("Índices negativos no permitidos")
+                            result = right_result[np.array(left, dtype=int)]
+                        else:
+                            if left < 0:
+                                raise Exception("Índice negativo no permitido")
+                            result = right_result[left]
+                    except IndexError:
+                        raise Exception("Índice fuera de rango")
+                
+                if scalar_input and op != '{' and len(result) == 1:
+                    return result[0]
+                return result
+            
+            return special_binary_right_function
         
         # normal case
         if op in [',', '#'] and not isinstance(left, np.ndarray):
@@ -532,33 +789,117 @@ class TreeVisitor(gVisitor):
         
         op = ctx.op.text
     
-        # second parameter is a function
-        if callable(right):
-            def relational_function(x):
+        # both parameters are functions
+        if callable(left) and callable(right):
+            def function_with_both_functions(x):
+                left_result = left(x)
+                right_result = right(x)
+                
+                if not isinstance(left_result, np.ndarray):
+                    left_result = np.array([left_result])
+                if not isinstance(right_result, np.ndarray):
+                    right_result = np.array([right_result])
+                
+                if len(left_result) == 1 and len(right_result) > 1:
+                    left_result = np.full_like(right_result, left_result[0])
+                elif len(right_result) == 1 and len(left_result) > 1:
+                    right_result = np.full_like(left_result, right_result[0])
+                
+                if len(left_result) != len(right_result):
+                    raise Exception("Length error: arrays must have the same length")
+                    
+                scalar_input = not isinstance(x, np.ndarray)
+                    
+                if op == '>':
+                    result = np.where(left_result > right_result, 1, 0)
+                elif op == '<':
+                    result = np.where(left_result < right_result, 1, 0)
+                elif op == '>=':
+                    result = np.where(left_result >= right_result, 1, 0)
+                elif op == '<=':
+                    result = np.where(left_result <= right_result, 1, 0)
+                elif op == '=':
+                    result = np.where(left_result == right_result, 1, 0)
+                elif op == '<>':
+                    result = np.where(left_result != right_result, 1, 0)
+                    
+                if scalar_input and len(result) == 1:
+                    return result[0]
+                return result
+                
+            return function_with_both_functions
+        
+        # first parameter is a function
+        if callable(left):
+            def relational_left_function(x):
                 if not isinstance(x, np.ndarray):
                     x = np.array([x])
                     scalar_input = True
                 else:
                     scalar_input = False
                     
+                left_result = left(x)
+                
+                if not isinstance(left_result, np.ndarray):
+                    left_result = np.array([left_result])
+                    
+                if len(left_result) == 1 and len(x) > 1:
+                    left_result = np.full_like(x, left_result[0])
+                    
                 if op == '>':
-                    result = np.where(left > x, 1, 0)
+                    result = np.where(left_result > right, 1, 0)
                 elif op == '<':
-                    result = np.where(left < x, 1, 0)
+                    result = np.where(left_result < right, 1, 0)
                 elif op == '>=':
-                    result = np.where(left >= x, 1, 0)
+                    result = np.where(left_result >= right, 1, 0)
                 elif op == '<=':
-                    result = np.where(left <= x, 1, 0)
+                    result = np.where(left_result <= right, 1, 0)
                 elif op == '=':
-                    result = np.where(left == x, 1, 0)
+                    result = np.where(left_result == right, 1, 0)
                 elif op == '<>':
-                    result = np.where(left != x, 1, 0)
+                    result = np.where(left_result != right, 1, 0)
                     
                 if scalar_input and len(result) == 1:
                     return result[0]
                 return result
-            
-            return relational_function
+                    
+            return relational_left_function
+
+        # second parameter is a function
+        if callable(right):
+            def relational_right_function(x):
+                if not isinstance(x, np.ndarray):
+                    x = np.array([x])
+                    scalar_input = True
+                else:
+                    scalar_input = False
+                    
+                right_result = right(x)
+                
+                if not isinstance(right_result, np.ndarray):
+                    right_result = np.array([right_result])
+                    
+                if len(right_result) == 1 and len(x) > 1:
+                    right_result = np.full_like(x, right_result[0])
+                    
+                if op == '>':
+                    result = np.where(left > right_result, 1, 0)
+                elif op == '<':
+                    result = np.where(left < right_result, 1, 0)
+                elif op == '>=':
+                    result = np.where(left >= right_result, 1, 0)
+                elif op == '<=':
+                    result = np.where(left <= right_result, 1, 0)
+                elif op == '=':
+                    result = np.where(left == right_result, 1, 0)
+                elif op == '<>':
+                    result = np.where(left != right_result, 1, 0)
+                    
+                if scalar_input and len(result) == 1:
+                    return result[0]
+                return result
+                    
+            return relational_right_function
 
         # normal case
         if not isinstance(left, np.ndarray):
