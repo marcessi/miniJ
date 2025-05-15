@@ -97,19 +97,31 @@ El intérprete soporta las siguientes características del lenguaje J:
 
 ## Cómo Ejecutar
 
-1. Asegúrate de tener Python instalado con los paquetes requeridos:
+### Requisitos
+- Python 3
+- ANTLR4 Runtime
+- Numpy
+
+### Instrucciones de instalación
+
+1. Instala las herramientas de ANTLR4 y su runtime para Python:
    ```
-   pip install antlr4-python3-runtime numpy
+   pip install antlr4-tools
+   antlr4
+   pip install antlr4-python3-runtime
+   pip install numpy
    ```
 
-2. Genera el parser a partir de la gramática ANTLR:
+   **Nota para usuarios de Windows**: Puede ser necesario realizar pasos adicionales para configurar ANTLR4 correctamente. Consulta la [referencia de antlr4-tools](https://github.com/antlr/antlr4-tools) para más detalles.
+
+2. Compila el proyecto usando make:
    ```
-   antlr4 -Dlanguage=Python3 grammar/g.g4
+   make
    ```
 
 3. Ejecuta el intérprete en un archivo de prueba:
    ```
-   python main.py tests/example2.j
+   python g.py tests/basic.j
    ```
 
 ## Limitaciones
