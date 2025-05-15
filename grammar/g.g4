@@ -12,7 +12,7 @@ assignment
     ;
 
 expression
-    // Atomic expressions (highest precedence)
+    // Atomic expressions
     : atom                                                        # atomExpr
     | '_' atom                                                    # negativeExpr
     | '(' expression ')'                                          # parenExpr
