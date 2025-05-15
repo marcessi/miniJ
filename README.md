@@ -121,7 +121,7 @@ El intérprete soporta las siguientes características del lenguaje J:
 
 3. Ejecuta el intérprete en un archivo de prueba:
    ```
-   python g.py tests/basic.j
+   python3 g.py tests/basic.j
    ```
 
 ## Limitaciones
