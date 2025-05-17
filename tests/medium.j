@@ -1,10 +1,7 @@
 NB. Test file for miniJ interpreter
 NB. Advanced tests focusing on function composition and advanced operators
 
-NB. ======= ADVANCED FUNCTION COMPOSITION =======
-NB. Función que comprueba si un número es mayor que 5
-gt5 =: 5 < ]
-gt5 7 3 6 4            NB. resultado: 1 0 1 0
+NB. ======= FUNCTION COMPOSITION =======
 
 NB. Función que comprueba si un número es primo (simplificado para números pequeños)
 mod2 =: 2 | ]
@@ -25,6 +22,7 @@ complex_fn =: square @: double @: add1
 complex_fn 1 2 3        NB. resultado: 16 36 64  NB. ((1+1)*2)², ((2+1)*2)², ((3+1)*2)²
 
 NB. ======= FOLD CON OPERADORES RELACIONALES =======
+
 NB. Comprueba si todos los elementos son positivos
 all_positive =: */ @: 0 < ]
 all_positive 1 2 3 4     NB. resultado: 1  NB. Todos son > 0
@@ -46,6 +44,7 @@ ordered 1 2 3 4 5       NB. resultado: 1  NB. Creciente
 ordered 1 2 4 3 5       NB. resultado: 0  NB. No creciente
 
 NB. ======= OPERADORES CON : =======
+
 NB. Operador : aplica la operación con el elemento y sí mismo
 +: 3 4 5               NB. resultado: 6 8 10  NB. Equivalente a 3+3, 4+4, 5+5
 -: 3 4 5               NB. resultado: 0 0 0  NB. Equivalente a 3-3, 4-4, 5-5
@@ -70,24 +69,19 @@ NB. Combinaciones de operadores con : y otros operadores
 double_square =: +: @: *:
 double_square 2 3 4    NB. resultado: 8 18 32  NB. (2*2)*2, (3*3)*2, (4*4)*2
 
-NB. En lugar de sign_test que resta dos funciones, usamos:
+NB. Funciones que devuelven 1 o 0 dependiendo de la condición
 pos =: 0 < ]
 neg =: 0 > ]
 zero =: 0 = ]
 pos 3              NB. resultado: 1
-pos _3             NB. resultado: -1
+pos _3             NB. resultado: 0
 neg _2             NB. resultado: 1
-neg 2              NB. resultado: 1
+neg 2              NB. resultado: 0
 zero 0             NB. resultado: 1
-zero 1             NB. resultado: 1
-
-NB. Calcular la media de un vector
-sum =: +/ @: ]
-count =: # @: ]
-mean =: +/ 2 4 6 8 % count 2 4 6 8
-mean           NB. resultado: 5  NB. (2+4+6+8)/4 = 20/4 = 5
+zero 1             NB. resultado: 0
 
 NB. ======= CASOS DE USO PRÁCTICOS =======
+
 NB. Filtrar números pares de una secuencia
 nums =: i. 10
 evens_mask_func =: 0 = ] @: mod2
@@ -119,8 +113,6 @@ compare1                NB. resultado: 24
 NB. Función que devuelve índices de elementos que cumplen una condición
 indices =: i. @: #
 gt5_mask =: 5 < ]
-
-NB. Aplicamos cada función por separado
 test_array =: 3 8 2 9 4
 idx =: indices test_array    NB. resultado: 0 1 2 3 4
 idx
