@@ -67,7 +67,7 @@ El intérprete soporta las siguientes características del lenguaje J:
   - `+: 3` = `6` (equivale a `3 + 3`)
   - `*: 4` = `16` (equivale a `4 * 4`)
   - `-: 5` = `0` (equivale a `5 - 5`)
-  - `=: 3` = `1` (equivale a `3 = 3`)
+  - `<=: 3` = `1` (equivale a `3 <= 3`)
 
 - **Reducción (`/`)**: Aplica la operación de forma acumulativa a todos los elementos:
   - `+/ 1 2 3 4` = `10` (suma: 1+2+3+4)
@@ -80,20 +80,71 @@ El intérprete soporta las siguientes características del lenguaje J:
   - `2 +~ 3` = `5` (equivale a `3 + 2`)
   - `2 |~ 7` = `1` (equivale a `7 | 2`)
 
-### Definición y Composición de Funciones
+### Definición de Funciones en miniJ
 
-- **Definición simple**: `double =: 2 * ]`
-- **Aplicación**: `double 3` = `6`
-- **Composición (`@:`)**: `square =: *:`, `double_square =: +: @: *:`, `double_square 3` = `18`
+miniJ permite definir funciones de diversas formas, ofreciendo flexibilidad similar a J:
+
+#### Tipos de Definiciones
+
+1. **Función literal con operador binario y argumento derecho**
+   - `double =: 2 * ]` (multiplica el argumento por 2)
+   - `add5 =: 5 + ]` (suma 5 al argumento)
+
+2. **Función literal con operador binario y argumento izquierdo**
+   - `reciprocal =: ] % 2` (divide el argumento entre 2)
+   - `subtract_from_10 =: 10 - ]` (resta el argumento de 10)
+
+3. **Función con operador binario entre dos funciones**
+   - `mean_square =: (+/ % #) @: *:` (media de los cuadrados)
+   - `is_above_avg =: ] > +/ % #` (comprueba si cada elemento supera la media)
+   - `pos_diff =: +/ @: (] > 0) - (] < 0)` (diferencia entre el numero de positivos y negativos)
+
+4. **Funciones unarias (operadores especiales y modificadores)**
+   - `identity =: ]` (devuelve el argumento sin cambios)
+   - `size =: #` (devuelve la longitud del array)
+   - `sequence =: i.` (genera secuencia desde 0 hasta n-1)
+   - `square =: *:` (eleva el argumento al cuadrado)
+   - `all_different =: <>/` (comprueba si todos los elementos son diferentes)
+
+
+#### Composición de Funciones
+
+La composición de funciones en miniJ se realiza con el operador `@:`, permitiendo encadenar operaciones:
+
+1. **Composición básica**:
+   - `square_then_double =: +: @: *:` (primero cuadrado, luego duplica)
+
+2. **Composición múltiple**:
+   - `add1 =: 1 + ]`
+   - `double =: +:` 
+   - `square =: *:`
+   - `complex_fn =: square @: double @: add1` (suma 1, duplica, y luego eleva al cuadrado)
+
+#### Aplicación de Funciones
+
+En miniJ, las funciones se aplican simplemente escribiendo la función seguida del argumento:
+
+- **Ejemplos básicos**:
+  - `double 3` = `6` (aplicar a un escalar)
+  - `square 1 2 3` = `1 4 9` (aplicar a un array)
+  - `sum_of_squares 1 2 3` = `14` (función compuesta)
+
+#### Asociatividad en Funciones
+
+En miniJ, las operaciones tienen asociatividad por la derecha, lo que afecta la forma en que se evalúan las expresiones:
+
+1. **Asociatividad en composiciones**:
+   - `f @: g @: h` se evalúa como `f @: (g @: h)`, aplicando primero `h`, luego `g` y finalmente `f`.
+
+2. **Asociatividad en operaciones**:
+   - `2 * 3 + 4` se evalúa como `2 * (3 + 4)` = `2 * 7` = `14`
+   - `5 - 2 - 1` se evalúa como `5 - (2 - 1)` = `5 - 1` = `4`
 
 ## Detalles de Implementación
 
 - **Gramática ANTLR**: Define la sintaxis del lenguaje con reglas para expresiones, operadores, y precedencia.
 - **Visitor Pattern**: Implementado en Python para interpretar y ejecutar el código.
 - **Numpy**: Utilizado para operaciones vectoriales eficientes.
-- **Asociatividad a la derecha**: Las operaciones se evalúan de derecha a izquierda, como en J:
-  - `5 + 2 * 3` = `5 + (2 * 3)` = `11`
-  - `5 * 2 + 3` = `5 * (2 + 3)` = `25`
 
 ## Cómo Ejecutar
 

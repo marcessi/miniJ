@@ -1,7 +1,4 @@
-NB. Test file for miniJ interpreter
-NB. Covers all features systematically
-
-NB. ======= BASIC ARITHMETIC AND ARRAYS =======
+NB. ======= ARITMÉTICA BÁSICA Y ARRAYS =======
 
 1 2 3                 NB. resultado: 1 2 3
 1 1 1 + 1 2 3         NB. resultado: 2 3 4
@@ -12,8 +9,6 @@ NB. ======= BASIC ARITHMETIC AND ARRAYS =======
 _5 + 3                NB. resultado: _2
 _1 * 2 3 4            NB. resultado: _2 _3 _4
 
-NB. ======= ARITHMETIC OPERATIONS =======
-
 10 - 7                NB. resultado: 3
 3 * 4                 NB. resultado: 12
 10 % 3                NB. resultado: 3
@@ -21,7 +16,7 @@ NB. ======= ARITHMETIC OPERATIONS =======
 2 ^ 4                 NB. resultado: 16
 2 3 4 * 3             NB. resultado: 6 9 12
 
-NB. ======= RELATIONAL OPERATIONS =======
+NB. ======= OPERACIONES RELACIONALES =======
 
 5 > 3                 NB. resultado: 1
 5 < 3                 NB. resultado: 0
@@ -31,7 +26,7 @@ NB. ======= RELATIONAL OPERATIONS =======
 5 <> 3                NB. resultado: 1
 1 2 3 > 0 2 4         NB. resultado: 1 0 0
 
-NB. ======= SPECIAL OPERATIONS =======
+NB. ======= OPERACIONES ESPECIALES =======
 
 ] 42                  NB. resultado: 42
 ] 1 2 3 4             NB. resultado: 1 2 3 4
@@ -65,7 +60,7 @@ a                     NB. resultado: 5 5 5
 double_a =: a + a     NB. resultado: 10 10 10
 double_a
 
-NB. ======= FUNCTION DEFINITIONS =======
+NB. ======= DEFINICIONES DE FUNCIONES =======
 
 square =: *:
 square 1 2 3 4        NB. resultado: 1 4 9 16
@@ -77,7 +72,7 @@ mod2 i. 5             NB. resultado: 0 1 0 1 0
 eq0 =: 0 = ]
 eq0 1 0 0 1           NB. resultado: 0 1 1 0
 
-NB. ======= FUNCTION COMPOSITION =======
+NB. ======= COMPOSICIÓN DE FUNCIONES =======
 
 parell =: eq0 @: mod2
 parell i. 8           NB. resultado: 1 0 1 0 1 0 1 0
@@ -89,8 +84,6 @@ squared_triple 1 2 3  NB. resultado: 9 36 81
 inc =: 1 + ]
 test =: +/ @: inc @: i.
 test 4                NB. resultado: 10
-
-NB. ======= COMPLEX EXAMPLES =======
 
 vec =: i. 10
 mask =: parell vec

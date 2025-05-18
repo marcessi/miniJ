@@ -1,6 +1,3 @@
-NB. Test file for miniJ interpreter - ADVANCED FUNCTION COMPOSITION
-NB. Pruebas avanzadas para composición funcional y transformaciones
-
 NB. ======= COMPOSICIONES RECURSIVAS Y TRANSFORMACIONES ANIDADAS =======
 
 NB. Fibonacci simplificado 
@@ -13,14 +10,6 @@ double =: 2 * ]
 cube =: ] ^ 3
 transform =: cube @: double
 transform 4 9 16   NB. resultado: 512 5832 32768   NB. (2*x)^3
-
-NB. ======= OPERACIONES VECTORIALES COMPUESTAS =======
-
-NB. Vector de distancias al origen simplificado
-points =: 3 4 5
-squares =: points ^ 2
-dist =: +/ squares
-dist                   NB. resultado: 50
 
 NB. ======= FILTROS COMBINADOS Y TRANSFORMACIONES =======
 

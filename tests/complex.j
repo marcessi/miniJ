@@ -1,14 +1,4 @@
-NB. Test file for miniJ interpreter - COMPLEX FUNCTION COMPOSITION
-NB. Casos diseñados para llevar la composición funcional al límite
-
 NB. ======= COMPOSICIONES ANIDADAS Y TRANSFORMACIONES EN CADENA =======
-
-NB. Dado un número, multiplícalo por 3, súmale 1 y elévalo al cuadrado
-triple =: 3 * ]
-add1 =: 1 + ]
-square =: *:
-crazy_chain =: square @: add1 @: triple
-crazy_chain 1 2 3      NB. resultado: 16 49 100   NB. ((3x+1)^2)
 
 NB. Promedio de los cuadrados de los elementos pares de una secuencia
 nums =: i. 10
@@ -30,13 +20,6 @@ NB. Composición múltiple: suma los cuadrados de los dobles de una secuencia
 double =: 2 * ]
 sum_sq_double =: +/ @: *: @: double @: ]
 sum_sq_double 1 2 3     NB. resultado: 56  NB. (2*1)^2 + (2*2)^2 + (2*3)^2 = 4+16+36
-
-NB. Evaluar si una secuencia es monótona creciente y todos > 0
-ordered =: <=/
-all_pos =: */ @: 0 < ]
-ordered_pos =: all_pos * ordered
-ordered_pos 1 2 3 4     NB. resultado: 1
-ordered_pos _1 2 3 4    NB. resultado: 0
 
 NB. Función que da 1 solo si todos los elementos son pares y están ordenados
 is_even =: 0 = ] @: 2 | ]
@@ -62,7 +45,7 @@ sum_sq_odds =: +/ @: *: @: ]
 odds
 sum_sq_odds odds        NB. resultado: 165  NB. 1²+3²+5²+7²+9² = 165
 
-NB. ======= CASOS ULTRA-COMPACTOS Y MATEMÁTICAMENTE RAROS =======
+NB. ======= CASOS COMPACTOS Y MATEMÁTICAMENTE COMPLEJOS =======
 
 NB. Función que suma los signos de los elementos (positivo:1, negativo:-1, cero:0)
 pos =: 0 < ]

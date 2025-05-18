@@ -1,26 +1,3 @@
-NB. Test file for miniJ interpreter
-NB. Advanced tests focusing on function composition and advanced operators
-
-NB. ======= FUNCTION COMPOSITION =======
-
-NB. Función que comprueba si un número es primo (simplificado para números pequeños)
-mod2 =: 2 | ]
-mod3 =: 3 | ]
-not_div_by_2 =: 0 <> ] @: mod2
-not_div_by_3 =: 0 <> ] @: mod3
-mask1 =: not_div_by_2 2 3 4 5 6 7 8 9 10
-mask2 =: not_div_by_3 2 3 4 5 6 7 8 9 10
-mask_primes =: (mask1 * mask2) + 1 1 0 0 0 0 0 0 0
-primes =: mask_primes # ]
-primes 2 3 4 5 6 7 8 9 10  NB. resultado: 2 3 5 7
-
-NB. Función compuesta con múltiples operaciones
-square =: *:
-double =: 2 * ]
-add1 =: 1 + ]
-complex_fn =: square @: double @: add1
-complex_fn 1 2 3        NB. resultado: 16 36 64  NB. ((1+1)*2)², ((2+1)*2)², ((3+1)*2)²
-
 NB. ======= FOLD CON OPERADORES RELACIONALES =======
 
 NB. Comprueba si todos los elementos son positivos
@@ -65,22 +42,25 @@ square 1 2 3           NB. resultado: 1 4 9
 double =: +:           NB. Define la función double usando +:
 double 1 2 3           NB. resultado: 2 4 6
 
-NB. Combinaciones de operadores con : y otros operadores
-double_square =: +: @: *:
-double_square 2 3 4    NB. resultado: 8 18 32  NB. (2*2)*2, (3*3)*2, (4*4)*2
+NB. ======= COMPOSICIÓN DE FUNCIONES =======
 
-NB. Funciones que devuelven 1 o 0 dependiendo de la condición
-pos =: 0 < ]
-neg =: 0 > ]
-zero =: 0 = ]
-pos 3              NB. resultado: 1
-pos _3             NB. resultado: 0
-neg _2             NB. resultado: 1
-neg 2              NB. resultado: 0
-zero 0             NB. resultado: 1
-zero 1             NB. resultado: 0
+NB. Función que comprueba si un número es primo (simplificado para números pequeños)
+mod2 =: 2 | ]
+mod3 =: 3 | ]
+not_div_by_2 =: 0 <> ] @: mod2
+not_div_by_3 =: 0 <> ] @: mod3
+mask1 =: not_div_by_2 2 3 4 5 6 7 8 9 10
+mask2 =: not_div_by_3 2 3 4 5 6 7 8 9 10
+mask_primes =: (mask1 * mask2) + 1 1 0 0 0 0 0 0 0
+primes =: mask_primes # ]
+primes 2 3 4 5 6 7 8 9 10  NB. resultado: 2 3 5 7
 
-NB. ======= CASOS DE USO PRÁCTICOS =======
+NB. Función compuesta con múltiples operaciones
+square =: *:
+double =: 2 * ]
+add1 =: 1 + ]
+complex_fn =: square @: double @: add1
+complex_fn 1 2 3        NB. resultado: 16 36 64  NB. ((1+1)*2)², ((2+1)*2)², ((3+1)*2)²
 
 NB. Filtrar números pares de una secuencia
 nums =: i. 10
@@ -96,10 +76,6 @@ odds =: odds_mask # nums
 odds                    NB. resultado: 1 3 5 7 9
 prod_odds =: */
 prod_odds odds          NB. resultado: 945  NB. 1*3*5*7*9 = 945
-
-NB. Función que calcula la suma de los cuadrados de los números pares
-sqsum_evens =: +/ @: square @: ]
-sqsum_evens evens       NB. resultado: 120  NB. 0²+2²+4²+6²+8² = 0+4+16+36+64 = 120
 
 NB. Aplicar múltiples operaciones y luego comparar resultados
 op1 =: +/ @: square
@@ -120,3 +96,14 @@ mask =: gt5_mask test_array  NB. resultado: 0 1 0 1 0
 mask
 result =: mask # idx         NB. resultado: 1 3  NB. Índices donde elementos > 5
 result
+
+NB. Función que devuelve 1 si el elemento es mayor que la media
+data =: 1 2 3 4 5
+is_above_avg =: ] > +/ % #
+mask =: is_above_avg data
+mask # data                 NB. resultado: 4 5  NB. Elementos mayores que la media
+
+NB. Funcion que devuelve la resta del numero de elementos positivos y negativos
+data =: _1 _2 3 4 5
+pos_diff =: +/ @: (] > 0) - (] < 0)
+pos_diff data               NB. resultado: 1  NB. 3 positivos - 2 negativos = 1
