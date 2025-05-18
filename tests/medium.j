@@ -1,4 +1,4 @@
-NB. ======= FOLD CON OPERADORES RELACIONALES =======
+NB. ======= OPERACIONES CON FOLD =======
 
 NB. Comprueba si todos los elementos son positivos
 all_positive =: */ @: 0 < ]
@@ -20,7 +20,7 @@ ordered =: <=/
 ordered 1 2 3 4 5       NB. resultado: 1  NB. Creciente
 ordered 1 2 4 3 5       NB. resultado: 0  NB. No creciente
 
-NB. ======= OPERADORES CON : =======
+NB. ======= OPERACIONES CON : =======
 
 NB. Operador : aplica la operación con el elemento y sí mismo
 +: 3 4 5               NB. resultado: 6 8 10  NB. Equivalente a 3+3, 4+4, 5+5
@@ -35,12 +35,6 @@ NB. Operadores relacionales con :
 <: 3 4 5               NB. resultado: 0 0 0  NB. Eq. a 3<3, 4<4, 5<5 (siempre falso)
 <=: 3 4 5              NB. resultado: 1 1 1  NB. Eq. a 3<=3, 4<=4, 5<=5 (siempre verdadero)
 <>: 3 4 5              NB. resultado: 0 0 0  NB. Eq. a 3<>3, 4<>4, 5<>5 (siempre falso)
-
-NB. Uso práctico de operadores con :
-square =: *:           NB. Define la función square usando *:
-square 1 2 3           NB. resultado: 1 4 9
-double =: +:           NB. Define la función double usando +:
-double 1 2 3           NB. resultado: 2 4 6
 
 NB. ======= COMPOSICIÓN DE FUNCIONES =======
 
@@ -90,14 +84,14 @@ NB. Función que devuelve índices de elementos que cumplen una condición
 indices =: i. @: #
 gt5_mask =: 5 < ]
 test_array =: 3 8 2 9 4
-idx =: indices test_array    NB. resultado: 0 1 2 3 4
-idx
-mask =: gt5_mask test_array  NB. resultado: 0 1 0 1 0
-mask
-result =: mask # idx         NB. resultado: 1 3  NB. Índices donde elementos > 5
-result
+idx =: indices test_array    
+idx                          NB. resultado: 0 1 2 3 4
+mask =: gt5_mask test_array
+mask                         NB. resultado: 0 1 0 1 0
+result =: mask # idx         
+result                       NB. resultado: 1 3  NB. Índices donde elementos > 5
 
-NB. Función que devuelve 1 si el elemento es mayor que la media
+NB. Función que devuelve los elementos mayores que la media
 data =: 1 2 3 4 5
 is_above_avg =: ] > +/ % #
 mask =: is_above_avg data
