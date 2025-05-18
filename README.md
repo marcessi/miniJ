@@ -92,7 +92,7 @@ miniJ permite definir funciones de diversas formas, ofreciendo flexibilidad simi
 
 2. **Función literal con operador binario y argumento izquierdo**
    - `reciprocal =: ] % 2` (divide el argumento entre 2)
-   - `subtract_from_10 =: 10 - ]` (resta el argumento de 10)
+   - `subtract_10 =: ] - 10` (resta 10 al argumento)
 
 3. **Función con operador binario entre dos funciones**
    - `mean_square =: (+/ % #) @: *:` (media de los cuadrados)
@@ -104,8 +104,7 @@ miniJ permite definir funciones de diversas formas, ofreciendo flexibilidad simi
    - `size =: #` (devuelve la longitud del array)
    - `sequence =: i.` (genera secuencia desde 0 hasta n-1)
    - `square =: *:` (eleva el argumento al cuadrado)
-   - `all_different =: <>/` (comprueba si todos los elementos son diferentes)
-
+   - `all_different =: <>/` (comprueba si todos los elementos adyacentes son distintos)
 
 #### Composición de Funciones
 
