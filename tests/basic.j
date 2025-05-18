@@ -72,6 +72,20 @@ mod2 i. 5             NB. resultado: 0 1 0 1 0
 eq0 =: 0 = ]
 eq0 1 0 0 1           NB. resultado: 0 1 1 0
 
+NB. ======= OPERACIONES CON =: (ASIGNACIÓN Y AUTOCOMPARACIÓN) =======
+
+=: 5                  NB. resultado: 1 (verifica que 5 = 5)
+=: (2 + 3)            NB. resultado: 1 (verifica que 5 = 5)
+b =: (=: 4) + (=: 9)
+b                     NB. b vale 2 (suma de dos autocomparaciones)
+
+check_eq =: =:        NB. define función de autocomparación
+check_eq 15           NB. resultado: 1 (verifica que 15 = 15)
+
+d =: 8
+e =: d = (=: d)       
+e                     NB. resultado: 0  NB. (8=(8=8)) = (8 = 1) = 0
+
 NB. ======= COMPOSICIÓN DE FUNCIONES =======
 
 parell =: eq0 @: mod2

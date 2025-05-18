@@ -8,7 +8,7 @@ line: (assignment | expression) (COMMENT)? NL | COMMENT NL | NL;
 lastLine: (assignment | expression) (COMMENT)?;
 
 assignment
-    : WORD '=:' expression        # assignmentLabel
+    : WORD '=' ':' expression        # assignmentLabel
     ;
 
 expression
