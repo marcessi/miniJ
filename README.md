@@ -91,7 +91,7 @@ miniJ permite definir funciones de diversas formas, ofreciendo flexibilidad simi
    - `add5 =: 5 + ]` (suma 5 al argumento)
 
 2. **Función literal con operador binario y argumento izquierdo**
-   - `reciprocal =: ] % 2` (divide el argumento entre 2)
+   - `div2 =: ] % 2` (divide el argumento entre 2)
    - `subtract_10 =: ] - 10` (resta 10 al argumento)
 
 3. **Función con operador binario entre dos funciones**
@@ -114,10 +114,7 @@ La composición de funciones en miniJ se realiza con el operador `@:`, permitien
    - `square_then_double =: +: @: *:` (primero cuadrado, luego duplica)
 
 2. **Composición múltiple**:
-   - `add1 =: 1 + ]`
-   - `double =: +:` 
-   - `square =: *:`
-   - `complex_fn =: square @: double @: add1` (suma 1, duplica, y luego eleva al cuadrado)
+   - `complex_fn =: *: @: +: @: (1 + ])` (suma 1, duplica, y luego eleva al cuadrado)
 
 #### Aplicación de Funciones
 
