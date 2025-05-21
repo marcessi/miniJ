@@ -106,6 +106,21 @@ miniJ permite definir funciones de diversas formas, ofreciendo flexibilidad simi
    - `square =: *:` (eleva el argumento al cuadrado)
    - `all_different =: <>/` (comprueba si todos los elementos adyacentes son distintos)
 
+#### Composición Implícita en Definiciones
+
+Es importante entender que en la definición de funciones, los operandos de los operadores pueden ser tanto valores como funciones:
+
+- **Con valores**: `double =: 2 * ]` usa el valor 2 como operando izquierdo.
+- **Con funciones**: `sum_squares =: +/ @: *:` usa la función `+/` como operando.
+
+Cuando un operando es una función, se produce una **composición implícita**:
+
+1. `size_plus_one =: # + 1` - Primero se aplica la función tamaño (`#`), luego se suma 1.
+2. `cube =: *: * ]` - Primero se eleva al cuadrado (`*:`), luego se multiplica por el argumento original.
+3. `mod3_squared =: (*: @: (3|]))` - Primero se calcula el módulo 3, luego se eleva al cuadrado.
+
+Esta composición implícita es diferente de la composición explícita con `@:`, pero sigue el mismo principio: la función del operando se aplica primero, y luego se utiliza el operador con el resultado.
+
 #### Composición de Funciones
 
 La composición de funciones en miniJ se realiza con el operador `@:`, permitiendo encadenar operaciones:

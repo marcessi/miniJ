@@ -33,11 +33,11 @@ NB. ======= OPERACIONES ESPECIALES =======
 5 , 6 7 8             NB. resultado: 5 6 7 8
 2 3 , 4 5 6           NB. resultado: 2 3 4 5 6
 # 1 2 3 4 5           NB. resultado: 5
-# 1 2                 NB. resultat: 2
+# 1 2                 NB. resultado: 2
 # 42                  NB. resultado: 1
 1 0 1 1 0 # 5 6 7 8 9 NB. resultado: 5 7 8
 1 3 { 5 6 7 8 9       NB. resultado: 6 8
-0 2 { 2 3 4           NB. resultat: 2 4
+0 2 { 2 3 4           NB. resultado: 2 4
 i. 6                  NB. resultado: 0 1 2 3 4 5
 +: 2 3 4              NB. resultado: 4 6 8
 *: 2 3 4              NB. resultado: 4 9 16

@@ -8,21 +8,15 @@ class TreeVisitor(gVisitor):
         self.variables = {}
         
     def visitProgram(self, ctx):
-        print(f"Procesando {len(list(ctx.line()))} líneas")
         # Procesar líneas normales (con salto de línea)
         for line_ctx in ctx.line():
             if line_ctx.assignment():
                 assign_stmt_node = line_ctx.assignment()
                 self.visit(assign_stmt_node)
             elif line_ctx.expression():
-                expr_text = self.preformat_expr_text(line_ctx.expression().getText())
-                
-                print(f"Procesando expresión: {expr_text}")
-                
                 result = self.visit(line_ctx.expression())
                 if result is not None:
                     self.results.append(result)
-                    print("Resultado: ", end="")
                     self.print_result(result)
         
         # Procesar la última línea (sin salto de línea)
@@ -32,48 +26,12 @@ class TreeVisitor(gVisitor):
                 assign_stmt_node = last_line.assignment()
                 self.visit(assign_stmt_node)
             elif last_line.expression():
-                expr_text = self.preformat_expr_text(last_line.expression().getText())
-                
-                print(f"Procesando expresión: {expr_text}")
-                
                 result = self.visit(last_line.expression())
                 if result is not None:
                     self.results.append(result)
-                    print("Resultado: ", end="")
                     self.print_result(result)
         
         return self.results
-
-    def preformat_expr_text(self, text):
-        formatted = []
-        i = 0
-        while i < len(text):
-            if text[i] == '_' and i+1 < len(text) and text[i+1].isdigit():
-                neg_num = '_'
-                i += 1
-                while i < len(text) and text[i].isdigit():
-                    neg_num += text[i]
-                    i += 1
-                formatted.append(neg_num)
-            elif text[i].isalpha():
-                ident = text[i]
-                i += 1
-                while i < len(text) and (text[i].isalnum() or text[i] == '_'):
-                    ident += text[i]
-                    i += 1
-                formatted.append(ident)
-            elif text[i].isdigit():
-                num = text[i]
-                i += 1
-                while i < len(text) and text[i].isdigit():
-                    num += text[i]
-                    i += 1
-                formatted.append(' '.join(num))
-            else:
-                formatted.append(text[i])
-                i += 1
-        
-        return ' '.join(formatted)
     
     def print_result(self, result):
         if isinstance(result, np.ndarray):
@@ -212,7 +170,7 @@ class TreeVisitor(gVisitor):
                 return modified[0]
             return modified
         
-        # Si la expresión es función, devolvemos una función. Si no, ejecutamos ahora.
+        # Si la expresión es función, devolvemos una función. Si no, ejecutamos.
         if callable(expr):
             return modified_operator
         else:
@@ -223,8 +181,7 @@ class TreeVisitor(gVisitor):
         op = ctx.op.text
         
         def fold_operator(x):
-            scalar_input = not isinstance(x, np.ndarray)
-            if scalar_input:
+            if not isinstance(x, np.ndarray):
                 x = np.array([x])
             
             # Evaluar función si lo es
@@ -268,7 +225,7 @@ class TreeVisitor(gVisitor):
             
             return folded
         
-        # Si la expresión es función, devolvemos una función. Si no, ejecutamos ahora.
+        # Si la expresión es función, devolvemos una función. Si no, ejecutamos.
         if callable(expr):
             return fold_operator
         else:
@@ -321,7 +278,7 @@ class TreeVisitor(gVisitor):
                 return result[0]
             return result
 
-        # Si cualquiera es función, devolvemos una función. Si no, ejecutamos ahora.
+        # Si cualquiera es función, devolvemos una función. Si no, ejecutamos.
         if callable(left) or callable(right):
             return binary_operator
         else:
@@ -374,7 +331,7 @@ class TreeVisitor(gVisitor):
                 return result[0]
             return result
 
-        # Si cualquiera es función, devolvemos una función. Si no, ejecutamos ahora.
+        # Si cualquiera es función, devolvemos una función. Si no, ejecutamos.
         if callable(left) or callable(right):
             return flipped_binary_operator
         else:
@@ -424,7 +381,7 @@ class TreeVisitor(gVisitor):
                 return result[0]
             return result
 
-        # Si cualquiera es función, devolvemos una función. Si no, ejecutamos ahora.
+        # Si cualquiera es función, devolvemos una función. Si no, ejecutamos.
         if callable(left) or callable(right):
             return special_binary_operator
         else:
@@ -476,13 +433,13 @@ class TreeVisitor(gVisitor):
                 return result[0]
             return result
 
-        # Si cualquiera es función, devolvemos una función. Si no, ejecutamos ahora.
+        # Si cualquiera es función, devolvemos una función. Si no, ejecutamos.
         if callable(left) or callable(right):
             return relational_operator
         else:
             return relational_operator(np.array([0]))     
 
-    #Function application
+    # Function application
     def visitFunctionCallExpr(self, ctx):
         func_name = ctx.WORD().getText()
         if func_name not in self.variables:
@@ -498,8 +455,8 @@ class TreeVisitor(gVisitor):
     
     def visitComposeExpr(self, ctx):
         # :@
-        f = self.visit(ctx.expression(1))  # Right function (applied first)
-        g = self.visit(ctx.expression(0))  # Left function (applied second)
+        f = self.visit(ctx.expression(1))  # Right function
+        g = self.visit(ctx.expression(0))  # Left function
         
         if not callable(f) or not callable(g):
             raise TypeError("Cannot compose non-function values")
@@ -509,7 +466,7 @@ class TreeVisitor(gVisitor):
         
         return composed_func
 
-    #ATOMS
+    # Atoms
     def visitListAtom(self, ctx):
         ints = []
 

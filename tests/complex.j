@@ -64,7 +64,7 @@ NB. Mezcla de operaciones con arrays y escalares usando máscaras
 mask =: 1 0 1 1 0
 mask2 =: 1 1 1 1
 vals =: 10 20 30 40 50
-10 + (mask2 # 4 , mask # vals)   NB. resultado: 4 10 30 40 + 10 = 14 20 40 50
+10 + (mask2 # 4 , mask # vals)   NB. resultado: 14 20 40 50   NB. 4 10 30 40 + 10 = 14 20 40 50
 
 NB. Operaciones con índices y filtrado
 idx =: 0 2
